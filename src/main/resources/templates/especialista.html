@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Servicios | Spa Harmony</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #8B786D;
+      --secondary: #C4B6A8;
+      --accent: #D8C4B6;
+      --light: #F5F0EB;
+      --dark: #3A3228;
+      --success: #A8C4A6;
+      --error: #C4A6A8;
+      --transition: all 0.3s ease-in-out;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 2rem;
+      background-image: linear-gradient(rgba(245, 240, 235, 0.9), rgba(245, 240, 235, 0.9)), 
+                      url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: var(--accent);
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      margin: 2.5rem 0 1.5rem;
+    }
+    
+    h3 {
+      font-size: 1.4rem;
+      margin: 1.5rem 0 1rem;
+      color: var(--secondary);
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(58, 50, 40, 0.05);
+      margin-bottom: 3rem;
+      transition: var(--transition);
+      border: 1px solid rgba(139, 120, 109, 0.1);
+    }
+    
+    .card:hover {
+      box-shadow: 0 10px 30px rgba(58, 50, 40, 0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--secondary);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: white;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(139, 120, 109, 0.2);
+    }
+    
+    input:hover, select:hover {
+      border-color: var(--primary);
+    }
+    
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    button:hover {
+      background-color: var(--dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(58, 50, 40, 0.1);
+    }
+    
+    button i {
+      margin-right: 8px;
+    }
+    
+    .btn-danger {
+      background-color: var(--error);
+    }
+    
+    .btn-danger:hover {
+      background-color: #B08E90;
+    }
+    
+    .day-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background-color: rgba(196, 182, 168, 0.1);
+      border-radius: 8px;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .day-checkbox {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    
+    .day-checkbox input {
+      width: auto;
+      margin-right: 10px;
+    }
+    
+    .time-selectors {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      flex: 2;
+    }
+    
+    .time-selectors select {
+      min-width: 120px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(58, 50, 40, 0.05);
+    }
+    
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid rgba(139, 120, 109, 0.1);
+    }
+    
+    th {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:hover td {
+      background-color: rgba(196, 182, 168, 0.1);
+    }
+    
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .actions button {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+    
+    .message {
+      padding: 12px;
+      border-radius: 8px;
+      margin: 1rem 0;
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    .success {
+      background-color: rgba(168, 196, 166, 0.3);
+      color: #2E4B2C;
+      border: 1px solid var(--success);
+    }
+    
+    .error {
+      background-color: rgba(196, 166, 168, 0.3);
+      color: #6E3C3E;
+      border: 1px solid var(--error);
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      .day-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .time-selectors {
+        width: 100%;
+      }
+      
+      .actions {
+        flex-direction: column;
+      }
+      
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-spa"></i> Gestión de Servicios</h1>
+    
+    <div class="card">
+      <h2>Crear Nuevo Servicio <a href="/"><button type="submit"> Cerrar Sesion</button></a></h2>
+      <form id="servicioForm">
+        <div class="form-group">
+          <label for="nombreServicio">Nombre del Servicio</label>
+          <input type="text" id="nombreServicio" placeholder="Ej: Masaje Relajante" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="duracion">Duración (minutos)</label>
+          <input type="number" id="duracion" placeholder="Ej: 60" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="precio">Precio ($)</label>
+          <input type="number" id="precio" placeholder="Ej: 50000" required step="1000">
+        </div>
+        
+        <h3><i class="far fa-clock"></i> Horario del Servicio</h3>
+        <div id="diasContainer"></div>
+        
+        <input type="hidden" id="especialistaId" value="ID_ESPECIALISTA_AQUI">
+        
+        <button type="submit"><i class="fas fa-save"></i> Guardar Servicio</button>
+      </form>
+    </div>
+    
+    <div class="card">
+      <h2>Mis Servicios Registrados</h2>
+      <table id="tablaServicios">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Duración</th>
+            <th>Precio</th>
+            <th>Horarios</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+    const horas = [];
+    for (let h = 6; h <= 20; h++) {
+      horas.push(`${h.toString().padStart(2, "0")}:00`);
+      horas.push(`${h.toString().padStart(2, "0")}:30`);
+    }
+
+    const diasContainer = document.getElementById("diasContainer");
+    dias.forEach(dia => {
+      const div = document.createElement("div");
+      div.className = "day-container";
+      div.innerHTML = `
+        <div class="day-checkbox">
+          <input type="checkbox" class="diaCheck" value="${dia}" id="dia-${dia.toLowerCase()}">
+          <label for="dia-${dia.toLowerCase()}">${dia}</label>
+        </div>
+        <div class="time-selectors">
+          <span>De</span>
+          <select class="horaInicio">${horas.map(h => `<option value="${h}">${h}</option>`).join('')}</select>
+          <span>a</span>
+          <select class="horaFin">${horas.map(h => `<option value="${h}">${h}</option>`).join('')}</select>
+        </div>
+      `;
+      diasContainer.appendChild(div);
+    });
+
+    document.getElementById("servicioForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("nombreServicio").value;
+      const duracion = parseInt(document.getElementById("duracion").value);
+      const precio = parseFloat(document.getElementById("precio").value);
+      const especialistaId = document.getElementById("especialistaId").value;
+
+      const horarios = [];
+      const checks = document.querySelectorAll(".diaCheck");
+      checks.forEach((check, i) => {
+        if (check.checked) {
+          const inicio = document.querySelectorAll(".horaInicio")[i].value;
+          const fin = document.querySelectorAll(".horaFin")[i].value;
+          horarios.push(`${check.value} ${inicio}-${fin}`);
+        }
+      });
+
+      try {
+        const response = await fetch("/api/servicios", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre, duracionMinutos: duracion, precio, horarios, especialistaId })
+        });
+
+        if (response.ok) {
+          const mensaje = document.createElement('div');
+          mensaje.className = 'message success';
+          mensaje.innerHTML = '<i class="fas fa-check-circle"></i> Servicio guardado exitosamente';
+          document.getElementById("servicioForm").prepend(mensaje);
+          setTimeout(() => mensaje.remove(), 3000);
+          
+          document.getElementById("servicioForm").reset();
+          cargarServicios();
+        } else {
+          throw new Error('Error en la respuesta del servidor');
+        }
+      } catch (error) {
+        const mensaje = document.createElement('div');
+        mensaje.className = 'message error';
+        mensaje.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error al guardar el servicio';
+        document.getElementById("servicioForm").prepend(mensaje);
+        setTimeout(() => mensaje.remove(), 3000);
+        console.error("Error:", error);
+      }
+    });
+
+    async function cargarServicios() {
+      const especialistaId = document.getElementById("especialistaId").value;
+      try {
+        const response = await fetch(`/api/servicios/especialista/${especialistaId}`);
+        const servicios = await response.json();
+        const tbody = document.querySelector("#tablaServicios tbody");
+        tbody.innerHTML = "";
+
+        servicios.forEach(servicio => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><strong>${servicio.nombre}</strong></td>
+            <td>${servicio.duracionMinutos} min</td>
+            <td>$${servicio.precio.toLocaleString()}</td>
+            <td>${servicio.horarios.join("<br>")}</td>
+            <td>
+              <div class="actions">
+				<button class="btn-danger" onclick="eliminarServicio('${servicio.id}')"><i class="fas fa-sync-alt"></i> Editar</button>
+                <button class="btn-danger" onclick="eliminarServicio('${servicio.id}')"><i class="fas fa-trash-alt"></i> Eliminar</button>
+              </div>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (error) {
+        console.error("Error al cargar servicios:", error);
+      }
+    }
+
+    async function eliminarServicio(id) {
+      if (confirm("¿Estás seguro de que deseas eliminar este servicio?")) {
+        try {
+          await fetch(`/api/servicios/${id}`, { method: "DELETE" });
+          cargarServicios();
+        } catch (error) {
+          console.error("Error al eliminar servicio:", error);
+        }
+      }
+    }
+
+    // Cargar servicios al iniciar
+    document.addEventListener('DOMContentLoaded', cargarServicios);
+  </script>
+</body>
+</html>

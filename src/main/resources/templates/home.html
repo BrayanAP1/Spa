@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SPA Renueva - Visitante</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: #f8f8f8;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #2e7d98, #4bb0c7);
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+	
+	a {
+	      color: white;
+	      margin: 0 1rem;
+	      text-decoration: none;
+	      font-weight: bold;
+	    }
+	
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .hero {
+      background: url('https://www.palaceresorts.com/jacuzzi_spa_palace_resorts_5f9b16e722.webp') no-repeat center center;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #2e7d98;
+      margin-bottom: 2rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      color: #2e7d98;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    footer {
+      background-color: #2e7d98;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#inicio"><h1>SPA Renueva</h1></a>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="#mision">Misión</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#productos">Productos</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section id="inicio" class="hero">
+    <h2>Bienvenido a SPA Renueva</h2>
+    <p>Un espacio diseñado para tu bienestar, descanso y renovación total. Descubre todo lo que tenemos para ti como visitante.</p>
+  </section>
+
+  <section id="mision">
+    <h2 class="section-title">Nuestra Misión</h2>
+    <p style="text-align: center; max-width: 700px; margin: auto;">
+      Brindar experiencias únicas de relajación y bienestar a través de terapias corporales, tratamientos naturales y un entorno armonioso que conecte cuerpo, mente y alma.
+    </p>
+  </section>
+
+  <section id="servicios">
+    <h2 class="section-title">Servicios Destacados</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm-zAFNFnN4SKXCCfIjL2rVCIabjqZa-8cEw&s" alt="Masajes">
+        <h3>Masajes Terapéuticos</h3>
+        <p>Relaja tus músculos y libera tensiones acumuladas con nuestros masajes profesionales.</p>
+      </div>
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8pxZ5CCmWdxngyRMZuc7kAduEnmGewIQ9Vw&s" alt="Aromaterapia">
+        <h3>Aromaterapia</h3>
+        <p>Utilizamos aceites esenciales naturales para promover bienestar emocional y físico.</p>
+      </div>
+      <div class="card">
+        <img src="https://www.hotellimaq.com/english/wp-content/uploads/2019/07/tratamientos-faciales-613x490.png" alt="Faciales">
+        <h3>Tratamientos Faciales</h3>
+        <p>Rejuvenece tu piel con cuidados personalizados que iluminan y nutren.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos">
+    <h2 class="section-title">Nuestros Productos</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDxdPy2ek4dqz8paNroq1EYyRUScxICPsO8Q&s" alt="Aceites">
+        <h3>Aceites Naturales</h3>
+        <p>Extractos esenciales para masajes, aromaterapia y cuidado corporal.</p>
+      </div>
+      <div class="card">
+        <img src="https://media.istockphoto.com/id/994807816/es/foto/ajuste-de-spa-con-velas-arom%C3%A1ticas.jpg?s=170667a&w=0&k=20&c=lOTssWtB4rrjD6PHUItGh8HQ7NWxN6iOWl56aidpHTY=" alt="Velas">
+        <h3>Velas Aromáticas</h3>
+        <p>Crea ambientes tranquilos y relajantes con nuestras velas artesanales.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion">
+    <h2 class="section-title">Dónde Estamos</h2>
+    <p style="text-align: center; max-width: 700px; margin: auto;">
+      📍 Calle 123 #45-67, Zona Centro – Tu Ciudad<br>
+      Abierto de lunes a sábado de 9:00am a 7:00pm
+    </p>
+  </section>
+
+  <section id="contacto">
+    <h2 class="section-title">Contáctanos</h2>
+    <p style="text-align: center; max-width: 700px; margin: auto;">
+      📞 Teléfono: 300 123 4567 <br>
+      📧 Correo: contacto@spa-renueva.com <br>
+      📱 Síguenos en Instagram y Facebook
+    </p>
+  </section>
+
+  <footer>
+    © 2025 SPA Renueva – Página para visitantes | Diseñado para Parcial Empresariales
+  </footer>
+</body>
+</html>

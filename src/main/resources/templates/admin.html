@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración - Spa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary: #5D8A7E;
+      --primary-dark: #4A6F65;
+      --secondary: #A7C4BC;
+      --light: #F5F9F8;
+      --lighter: #FFFFFF;
+      --text: #2D3748;
+      --text-light: #4A5568;
+      --error: #E53E3E;
+      --success: #38A169;
+      --warning: #DD6B20;
+      --border: #E2E8F0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h2 {
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    h2 i {
+      margin-right: 0.8rem;
+      color: var(--primary);
+    }
+
+    h3 {
+      color: var(--primary);
+      font-weight: 500;
+      font-size: 1.4rem;
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--secondary);
+    }
+
+    .logout-button {
+      background-color: var(--error);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .logout-button:hover {
+      background-color: #C53030;
+      transform: translateY(-2px);
+    }
+
+    .logout-button i {
+      margin-right: 0.5rem;
+    }
+
+    form {
+      background-color: var(--lighter);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    form:hover {
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(93, 138, 126, 0.2);
+    }
+
+    input:hover {
+      border-color: var(--primary);
+    }
+
+    button[type="submit"] {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    button[type="submit"] i {
+      margin-right: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background-color: var(--lighter);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 3rem;
+    }
+
+    th {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    th:first-child {
+      border-top-left-radius: 10px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 10px;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-light);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: rgba(167, 196, 188, 0.1);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-buttons button {
+      padding: 0.5rem 0.8rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .action-buttons button i {
+      margin-right: 0.3rem;
+    }
+
+    .edit-btn {
+      background-color: var(--secondary);
+      color: var(--text);
+    }
+
+    .edit-btn:hover {
+      background-color: #95B8AD;
+    }
+
+    .delete-btn {
+      background-color: var(--error);
+      color: white;
+    }
+
+    .delete-btn:hover {
+      background-color: #C53030;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h2><i class="fas fa-user-md"></i> Administrar Especialistas</h2>
+      <a href="/" class="logout-button"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+    </header>
+
+    <form id="especialistaForm">
+      <div class="form-grid">
+        <input type="text" id="ccEspecialista" placeholder="Cédula" required>
+        <input type="text" id="nombreEspecialista" placeholder="Nombre completo" required>
+        <input type="email" id="correoEspecialista" placeholder="Correo electrónico" required>
+        <input type="number" id="edadEspecialista" placeholder="Edad" required>
+        <input type="password" id="contraseñaEspecialista" placeholder="Contraseña" required>
+      </div>
+      <button type="submit"><i class="fas fa-plus-circle"></i> Agregar Especialista</button>
+    </form>
+
+    <h3><i class="fas fa-list"></i> Lista de Especialistas</h3>
+    <table id="especialistasTable">
+      <thead>
+        <tr>
+          <th>Cédula</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Edad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <header>
+      <h2><i class="fas fa-user-tie"></i> Administrar Recepcionistas</h2>
+    </header>
+
+    <form id="recepcionistaForm">
+      <div class="form-grid">
+        <input type="text" id="ccRecepcionista" placeholder="Cédula" required>
+        <input type="text" id="nombreRecepcionista" placeholder="Nombre completo" required>
+        <input type="email" id="correoRecepcionista" placeholder="Correo electrónico" required>
+        <input type="number" id="edadRecepcionista" placeholder="Edad" required>
+        <input type="password" id="contraseñaRecepcionista" placeholder="Contraseña" required>
+      </div>
+      <button type="submit"><i class="fas fa-plus-circle"></i> Agregar Recepcionista</button>
+    </form>
+
+    <h3><i class="fas fa-list"></i> Lista de Recepcionistas</h3>
+    <table id="recepcionistasTable">
+      <thead>
+        <tr>
+          <th>Cédula</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Edad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <h3><i class="fas fa-calendar-check"></i> Lista de Citas</h3>
+  <table id="citasTable">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Teléfono</th>
+        <th>Especialista</th>
+        <th>Servicio</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+
+  <script>
+    async function loadEspecialistas() {
+      const response = await fetch('/api/especialistas');
+      const especialistas = await response.json();
+      const tableBody = document.querySelector('#especialistasTable tbody');
+      tableBody.innerHTML = '';
+      especialistas.forEach(especialista => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${especialista.cc}</td>
+          <td>${especialista.nombre}</td>
+          <td>${especialista.correo}</td>
+          <td>${especialista.edad}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="edit-btn" onclick="editEspecialista('${especialista.id}')"><i class="fas fa-edit"></i> Editar</button>
+              <button class="delete-btn" onclick="deleteEspecialista('${especialista.id}')"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    async function loadRecepcionistas() {
+      const response = await fetch('/api/recepcionistas');
+      const recepcionistas = await response.json();
+      const tableBody = document.querySelector('#recepcionistasTable tbody');
+      tableBody.innerHTML = '';
+      recepcionistas.forEach(recepcionista => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${recepcionista.cc}</td>
+          <td>${recepcionista.nombre}</td>
+          <td>${recepcionista.correo}</td>
+          <td>${recepcionista.edad}</td>
+          <td>
+            <div class="action-buttons">
+              <button class="edit-btn" onclick="editRecepcionista('${recepcionista.id}')"><i class="fas fa-edit"></i> Editar</button>
+              <button class="delete-btn" onclick="deleteRecepcionista('${recepcionista.id}')"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            </div>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    async function loadCitas() {
+      const [citasRes, especialistasRes, serviciosRes] = await Promise.all([
+        fetch('/api/citas'),
+        fetch('/api/especialistas'),
+        fetch('/api/servicios')
+      ]);
+
+      const [citas, especialistas, servicios] = await Promise.all([
+        citasRes.json(),
+        especialistasRes.json(),
+        serviciosRes.json()
+      ]);
+
+      const especialistasMap = {};
+      especialistas.forEach(e => especialistasMap[e.id] = e.nombre);
+
+      const serviciosMap = {};
+      servicios.forEach(s => serviciosMap[s.id] = s.nombre);
+
+      const tableBody = document.querySelector('#citasTable tbody');
+      tableBody.innerHTML = '';
+
+      citas.forEach(cita => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${cita.clienteNombre || 'N/A'}</td>
+          <td>${cita.clienteTelefono || 'N/A'}</td>
+          <td>${especialistasMap[cita.especialistaId] || 'No encontrado'}</td>
+          <td>${serviciosMap[cita.servicioId] || 'No encontrado'}</td>
+          <td>${cita.fecha || 'N/A'}</td>
+          <td>${cita.hora || 'N/A'}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    async function deleteEspecialista(id) {
+      if (confirm('¿Está seguro de que desea eliminar este especialista?')) {
+        await fetch(`/api/especialistas/${id}`, {
+          method: 'DELETE'
+        });
+        loadEspecialistas();
+      }
+    }
+
+    async function deleteRecepcionista(id) {
+      if (confirm('¿Está seguro de que desea eliminar este recepcionista?')) {
+        await fetch(`/api/recepcionistas/${id}`, {
+          method: 'DELETE'
+        });
+        loadRecepcionistas();
+      }
+    }
+
+    function editEspecialista(id) {
+      alert('Editar especialista con id: ' + id);
+    }
+
+    function editRecepcionista(id) {
+      alert('Editar recepcionista con id: ' + id);
+    }
+
+    document.querySelector('#especialistaForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const especialista = {
+        cc: document.querySelector('#ccEspecialista').value,
+        nombre: document.querySelector('#nombreEspecialista').value,
+        correo: document.querySelector('#correoEspecialista').value,
+        edad: document.querySelector('#edadEspecialista').value,
+        contraseña: document.querySelector('#contraseñaEspecialista').value
+      };
+
+      await fetch('/api/especialistas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(especialista)
+      });
+
+      loadEspecialistas();
+      this.reset();
+    });
+
+    document.querySelector('#recepcionistaForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const recepcionista = {
+        cc: document.querySelector('#ccRecepcionista').value,
+        nombre: document.querySelector('#nombreRecepcionista').value,
+        correo: document.querySelector('#correoRecepcionista').value,
+        edad: document.querySelector('#edadRecepcionista').value,
+        contraseña: document.querySelector('#contraseñaRecepcionista').value
+      };
+
+      await fetch('/api/recepcionistas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(recepcionista)
+      });
+
+      loadRecepcionistas();
+      this.reset();
+    });
+
+    window.onload = function() {
+      loadEspecialistas();
+      loadRecepcionistas();
+      loadCitas();
+    }
+  </script>
+
+</body>
+</html>

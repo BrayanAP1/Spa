@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPA Renueva - Inicio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    body {
+      background: url('https://media.istockphoto.com/id/1325095289/es/foto/primer-plano-de-la-naturaleza-muerta-de-un-arreglo-de-spa-tranquilo.jpg?s=612x612&w=0&k=20&c=rUCCOMGJU42uQVJjFeTbPfNA9VKVl02nGKpVQlsWOtg=') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      padding: 3rem 1rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .content {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #2e7d98;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+	.card-container {
+	  display: grid;
+	  grid-template-columns: repeat(2, 1fr); /* Siempre 2 columnas */
+	  gap: 1.5rem;
+	  margin-top: 2rem;
+	}
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      color: #2e7d98;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .card a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #2e7d98;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .card a:hover {
+      background: #24667e;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+	@media (max-width: 600px) {
+	  .card-container {
+	    grid-template-columns: 1fr; /* Solo 1 columna en pantallas pequeñas */
+	  }
+	}
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="content">
+      <h1>Página web de SPA Renueva</h1>
+      <h2>Parcial Empresariales</h2>
+      <p>Descubre una experiencia de bienestar total. Elige tu rol para comenzar:</p>
+
+      <div class="card-container">
+        <!-- ADMIN -->
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png" alt="Administrador">
+          <h3>Administrador</h3>
+          <p>Gestiona cuentas de especialistas y recepcionistas.</p>
+          <a href="/login">Ingresar</a>
+        </div>
+
+        <!-- ESPECIALISTA -->
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/3771/3771545.png" alt="Especialista">
+          <h3>Especialista</h3>
+          <p>Crea servicios y actualiza tu perfil profesional.</p>
+          <a href="/loginEspe">Ingresar</a>
+        </div>
+
+        <!-- RECEPCIONISTA -->
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/639/639365.png" alt="Recepcionista">
+          <h3>Recepcionista</h3>
+          <p>Consulta y gestiona las citas de los clientes.</p>
+          <a href="/loginRecep">Ingresar</a>
+        </div>
+
+        <!-- CLIENTE -->
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Cliente">
+          <h3>Cliente</h3>
+          <p>Reserva tu cita y accede a nuestros servicios.</p>
+		  <a href="/loginUsu">Iniciar Sesión</a>
+        </div>
+
+        <!-- VISITANTE -->
+        <div class="card">
+          <img src="https://cdn-icons-png.flaticon.com/512/709/709790.png" alt="Visitante">
+          <h3>Visitante</h3>
+          <p>Explora la página sin necesidad de iniciar sesión.</p>
+          <a href="/home">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

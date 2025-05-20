@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renueva Spa - Gestión de Usuarios</title>
+</head>
+<style>
+    :root {
+      --primary: #7A6A5F;
+      --secondary: #B8A99D;
+      --light: #F8F5F2;
+      --lighter: #FFF;
+      --text: #3E3E3E;
+      --success: #A5B8A4;
+      --error: #B8A4A5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+      background-image: linear-gradient(rgba(248, 245, 242, 0.9), rgba(248, 245, 242, 0.9)),
+                        url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    .register-container {
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 30px;
+      background: var(--lighter);
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(122, 106, 95, 0.1);
+    }
+
+    .register-container:hover {
+      box-shadow: 0 8px 25px rgba(122, 106, 95, 0.15);
+    }
+
+    h1, h2 {
+      color: var(--primary);
+      text-align: center;
+      font-weight: 300;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-size: 28px;
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h1:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 2px;
+      background: var(--secondary);
+    }
+
+    h1:hover:after {
+      width: 70px;
+      background: var(--primary);
+    }
+
+    h2 {
+      margin: 40px 0 20px;
+      font-size: 22px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 8px 0;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    input {
+      border: 1px solid var(--secondary);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(122, 106, 95, 0.2);
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+    }
+
+    button:hover {
+      background-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    #mensaje {
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .success {
+      background-color: rgba(165, 184, 164, 0.3);
+      color: #2F4A2E;
+      border: 1px solid var(--success);
+    }
+
+    .error {
+      background-color: rgba(184, 164, 165, 0.3);
+      color: #6E3C3E;
+      border: 1px solid var(--error);
+    }
+
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--lighter);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(122, 106, 95, 0.1);
+    }
+
+    th {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px;
+      text-align: center;
+      font-weight: 400;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(184, 169, 157, 0.3);
+      text-align: center;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: rgba(184, 169, 157, 0.1);
+    }
+
+    table input {
+      margin: 0;
+      background: transparent;
+      border: 1px solid transparent;
+      text-align: center;
+    }
+
+    table input:hover, table input:focus {
+      background: white;
+      border: 1px solid var(--secondary);
+    }
+
+    ul {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    @media (max-width: 600px) {
+      .register-container {
+        padding: 20px;
+        margin: 20px 10px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+    }
+  </style>
+<body>
+
+  <div class="register-container">
+    <h1>Renueva Spa</h1>
+    <form id="registerForm">
+      <input type="text" id="nombre" placeholder="Nombre" required>
+      <input type="email" id="correo" placeholder="Correo" required>
+      <input type="password" id="contraseña" placeholder="Contraseña" required>
+      <button type="submit">Registrar Usuario</button>
+    </form>
+    <a href="/"><button>Cerrar Sesión</button></a>
+    <p id="mensaje"></p>
+  </div>
+
+  <h2>Lista de Usuarios</h2>
+  <table id="usuariosTable">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="usuariosBody"></tbody>
+  </table>
+
+  <h2>Lista de Horarios de Espcialista</h2>
+  <table id="especialistasTable">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Horario</th>
+      </tr>
+    </thead>
+    <tbody id="especialistasBody"></tbody>
+  </table>
+
+  <script>
+    async function cargarUsuarios() {
+      const response = await fetch("/api/usuarios");
+      const usuarios = await response.json();
+      const tbody = document.querySelector("#usuariosBody");
+      tbody.innerHTML = "";
+
+      usuarios.forEach(usuario => {
+        const fila = document.createElement("tr");
+
+        fila.innerHTML = `
+          <td><input id="nombre-${usuario.id}" value="${usuario.nombre}" disabled></td>
+          <td><input id="correo-${usuario.id}" value="${usuario.correo}" disabled></td>
+          <td>
+            <button onclick="activarEdicion('${usuario.id}')">Editar</button>
+            <button onclick="guardarEdicion('${usuario.id}')" style="display:none;" id="guardar-${usuario.id}">Guardar</button>
+            <button onclick="eliminarUsuario('${usuario.id}')">Eliminar</button>
+          </td>
+        `;
+
+        tbody.appendChild(fila);
+      });
+    }
+
+    async function eliminarUsuario(id) {
+      await fetch(`/api/usuarios/${id}`, { method: "DELETE" });
+      cargarUsuarios();
+    }
+
+    function activarEdicion(id) {
+      document.getElementById(`nombre-${id}`).disabled = false;
+      document.getElementById(`correo-${id}`).disabled = false;
+      document.getElementById(`guardar-${id}`).style.display = "inline";
+    }
+
+    async function guardarEdicion(id) {
+      const nombre = document.getElementById(`nombre-${id}`).value;
+      const correo = document.getElementById(`correo-${id}`).value;
+
+      const response = await fetch(`/api/usuarios/${id}`);
+      const usuario = await response.json();
+
+      usuario.nombre = nombre;
+      usuario.correo = correo;
+
+      await fetch(`/api/usuarios/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(usuario)
+      });
+
+      cargarUsuarios();
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const contraseña = document.getElementById("contraseña").value;
+
+      const response = await fetch("/api/usuarios", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, correo, contraseña })
+      });
+
+      const mensaje = document.getElementById("mensaje");
+      if (response.ok) {
+        mensaje.textContent = "Usuario registrado exitosamente.";
+        mensaje.className = "success";
+        document.getElementById("registerForm").reset();
+        cargarUsuarios();
+      } else {
+        mensaje.textContent = "Error al registrar usuario.";
+        mensaje.className = "error";
+      }
+    });
+
+    async function cargarEspecialistas() {
+      const response = await fetch("/api/especialistas");
+      const especialistas = await response.json();
+      const tbody = document.querySelector("#especialistasBody");
+      tbody.innerHTML = "";
+
+      especialistas.forEach(especialista => {
+        const fila = document.createElement("tr");
+        const horarioHtml = especialista.horario && especialista.horario.length
+          ? especialista.horario.join('<br>')
+          : generarHorarioFalso();
+
+        fila.innerHTML = `
+          <td>${especialista.nombre}</td>
+          <td>${especialista.correo}</td>
+          <td>${horarioHtml}</td>
+        `;
+
+        tbody.appendChild(fila);
+      });
+    }
+
+    function generarHorarioFalso() {
+      const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+      const horario = [];
+      const usados = new Set();
+      const cantidad = Math.floor(Math.random() * 3) + 2; // 2-4 días
+
+      while (horario.length < cantidad) {
+        const dia = dias[Math.floor(Math.random() * dias.length)];
+        if (usados.has(dia)) continue;
+        usados.add(dia);
+
+        const inicio = Math.floor(Math.random() * 5) + 8; // 08-12
+        const fin = inicio + Math.floor(Math.random() * 4) + 1; // +1 a +4 horas
+        horario.push(`${dia} ${inicio.toString().padStart(2, '0')}:00 - ${fin.toString().padStart(2, '0')}:00`);
+      }
+
+      return horario.join('<br>');
+    }
+
+    // Inicializar al cargar
+    cargarUsuarios();
+    cargarEspecialistas();
+  </script>
+
+</body>
+</html>
